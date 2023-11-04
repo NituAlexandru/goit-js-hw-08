@@ -1,10 +1,12 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 // Change code below this line
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 console.log(galleryItems);
 
+const galleryRef = document.querySelector('.gallery');
 
 const CreateGalleryMarkup = items => {
   return items
@@ -28,22 +30,33 @@ const CreateGalleryMarkup = items => {
 galleryRef.innerHTML = CreateGalleryMarkup(galleryItems); //Apeleaza functioa CreateGalleryMarkup
 console.log(galleryRef);
 
+//Initializeaza SimpleLightbox
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+
+
 // Functie deschidere fereastra modala cand se face click pe o img
-const openModal = e => {
-  e.preventDefault();
-  if (e.target.nodeName !== 'IMG') return;
+// Nu mai este nevoie de ea deoarece face SimpleLightbox asta
 
-  const instance = basicLightbox.create(`
-    <img src="${e.target.dataset.source}" width="800" height="600">
-  `);
+// const openModal = e => {
+//   e.preventDefault();
+//   if (e.target.nodeName !== 'IMG') return;
 
-  instance.show();
+//   const instance = basicLightbox.create(`
+//     <img src="${e.target.dataset.source}" width="800" height="600">
+//   `);
 
-  window.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      instance.close();
-    }
-  });
-};
+//   instance.show();
 
-galleryRef.addEventListener('click', openModal);
+//   window.addEventListener('keydown', e => {
+//     if (e.key === 'Escape') {
+//       instance.close();
+//     }
+//   });
+// };
+
+// galleryRef.addEventListener('click', openModal);
